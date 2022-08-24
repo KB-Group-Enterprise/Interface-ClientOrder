@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <p id="error"></p>
+    <h1>socket id: <span id="socketId"></span></h1>
+    <h1>user id: <span id="userId"></span></h1>
+    <h1>clientGroup id: <span id="clientGroupId"></span></h1>
+    <div>
+      <label>username</label>
+      <input type="text" name="" id="username" value="client-1" />
+      <label>tableToken</label>
+      <input
+        type="text"
+        name=""
+        id="tableToken"
+        value="3f861ea3-54d2-48da-a0d9-c8a9686f05d6"
+        style="width: 20%"
+      />
+      <button id="joinTable">Join Table</button>
+      <button style="display: none" id="leaveTable">Leave Table</button>
+      <p id="joinedTable"></p>
+    </div>
+    <div id="noti-table">
+      <h1>Notification Table</h1>
+      <p>message: <span id="message"></span></p>
+      <p>type: <span id="type"></span></p>
+      <ul id="userInRoom"></ul>
+      <h4>SelectedFoodList</h4>
+      <ol id="onSelectedFood"></ol>
+      <button id="orderAction">Create order</button>
+    </div>
+    <div>
+      <select id="menuList" multiple>
+        <!-- <option value="5&food5">menuId: 5 foodName: food5</option>
+        <option value="10&food10">menuId: 10 foodName: food10</option>
+        <option value="15&food15">menuId: 15 foodName: food15</option>
+        <option value="1&food1">menuId: 1 foodName: food1</option> -->
+      </select>
+      <button id="selectFood">select food</button>
+      <ol id="selectedFoodList"></ol>
+      <p id="deselectedFood"></p>
+      <h3>Order Detail</h3>
+      <ol id="foodOrderList"></ol>
+    </div>
+    <script
+      src="https://cdn.socket.io/4.5.0/socket.io.min.js"
+      integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./index.js"></script>
+  </body>
+</html>
