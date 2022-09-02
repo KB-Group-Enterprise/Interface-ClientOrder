@@ -180,7 +180,7 @@ socket.on('noti-table', async (data) => {
         onSelectedFood.appendChild(div)
     }
     restaurantId = data.restaurantId;
-    const res = await fetch(`http://localhost:4000/api/menu/restaurant/${data.restaurantId}`)
+    const res = await fetch(`http://192.168.1.104:4000/api/menu/restaurant/${data.restaurantId}`)
     const json = await res.json();
     const menuList = json.data.menu
     console.log('menuList', menuList)
