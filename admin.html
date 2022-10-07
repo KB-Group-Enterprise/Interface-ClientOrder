@@ -13,6 +13,45 @@
       <button id="join">Join</button>
     </div>
     <div>
+      <h3>Update Order</h3>
+      <form id="updateOrderForm">
+        <label for="">Order Id:</label>
+        <input type="text" name="" id="orderId" /> <br />
+        <label for="">clientState:</label>
+        <select name="" id="clientState">
+          <option value="PENDING">Pending</option>
+          <option value="CONFIRMED">Confirm</option>
+          <option value="REJECT">Reject</option>
+          <option value="UPDATE_FOOD">Update Food</option></select
+        ><br />
+        <label for="">overallFoodStatus:</label>
+        <select name="" id="overallFoodStatus">
+          <option value="PENDING">Pending</option>
+          <option value="ALL_SERVED">All Served</option></select
+        ><br />
+        <label for="">orderStatus:</label>
+        <select name="" id="orderStatus">
+          <option value="NOT_CHECKOUT">Not checkout</option>
+          <option value="BILLING">Billing</option>
+          <option value="PAID">Paid</option>
+          <option value="CANCEL">CANCEL</option></select
+        ><br />
+        <label for="">deleteFoodList:</label>
+        <input id="deleteFoodOrderList" type="text" /> <br />
+        <label for="">update food order id:</label>
+        <input id="updateFoodOrderId" type="text" /> <br />
+        <select name="" id="foodOrderStatus">
+          <option value="COOKING">COOKING</option>
+          <option value="SERVED">SERVED</option>
+          <option value="PENDING">PENDING</option>
+          <option value="CANCEL">CANCEL</option>
+        </select>
+        <label for="">TransferTable id:</label>
+        <input id="transferTableId" type="text" /> <br />
+        <input type="submit" />
+      </form>
+    </div>
+    <div>
       <p>order list:</p>
       <ol id="orders"></ol>
     </div>

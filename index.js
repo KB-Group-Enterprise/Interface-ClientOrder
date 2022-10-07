@@ -1,10 +1,31 @@
-const socket = io('http://localhost:3505/client')
+const socket = io('http://192.168.1.106:3505/client')
 let username = document.getElementById('username').value;
 let tableToken = document.getElementById('tableToken').value;
 let userId
 let order
 let restaurantId
 let isCreateOrder = true;
+function setCookie(cname, cvalue, exdays) {
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    let expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return undefined;
+}
 socket.on('connect', (s) => {
     // console.log(s)
     const socketIdElement = document.getElementById('socketId');
@@ -15,9 +36,11 @@ const joinButton = document.getElementById('joinTable')
 joinButton.addEventListener('click', (event) => {
     username = document.getElementById('username').value;
     tableToken = document.getElementById('tableToken').value;
+    const userId = getCookie('userId')
     socket.emit('joinTable', {
         username: username,
         tableToken: tableToken,
+        userId,
     })
 })
 
@@ -69,6 +92,7 @@ leaveTable.addEventListener('click', () => {
 })
 socket.on('joinedTable', (message) => {
     console.log('joinedTable: ', message)
+    setCookie('userId', message.userId, 1)
     const joinedTable = document.getElementById('joinedTable')
     const userIdElem = document.getElementById('userId')
     leaveTable.style = 'display: block;'
@@ -100,14 +124,12 @@ selectFood.addEventListener('click', () => {
     const selectedFood = getValues(menuList)
     console.log('select food', selectedFood)
     if (!selectedFood) return;
-    for (const food of selectedFood) {
-        socket.emit('selectFood', {
-            userId,
-            username,
-            tableToken,
-            selectedFood: food,
-        })
-    }
+    socket.emit('selectFood', {
+        userId,
+        username,
+        tableToken,
+        selectedFood: selectedFood,
+    })
 })
 
 function getValues(options) {
@@ -180,7 +202,8 @@ socket.on('noti-table', async (data) => {
         onSelectedFood.appendChild(div)
     }
     restaurantId = data.restaurantId;
-    const res = await fetch(`http://192.168.1.104:4000/api/menu/restaurant/${data.restaurantId}`)
+    // const res = await fetch(`https://menuler.me/api/menu/restaurant/${data.restaurantId}`)
+    const res = await fetch(`http://192.168.1.106:4000/api/menu/restaurant/${data.restaurantId}`)
     const json = await res.json();
     const menuList = json.data.menu
     console.log('menuList', menuList)
